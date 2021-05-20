@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cource_program.cpp">
+    <ClCompile Include="PoleChudes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PoleChudes.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,5 +19,6 @@ public:
 	char enterLetter();
 	void fillWord(string& word, char letter);
 	string enteringWord();
+	char getLetterFromUser();
 };
 

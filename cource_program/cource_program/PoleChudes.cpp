@@ -52,14 +52,14 @@ char PoleChudes::enterLetter()
 	char letter;
 	bool ind;
 	cout << "\n enter your letter \n";
-	cin >> letter;
+	letter = getLetterFromUser();
 	do {
 		ind = false;
 		for (int i = 0; i != numberOfEnteredLetters; i++) {
 			if (letter == enteredLetters[i]) {
 				cout << "\nletter " << letter << " is already enterred\nEnter enother one: ";
 				ind = true;
-				cin >> letter;
+				letter = getLetterFromUser();
 			}
 		}
 	} while (ind);
@@ -94,7 +94,7 @@ string PoleChudes::enteringWord()
 		while ((c = getchar()) != '\n') {
 			if (!(c >= 'a' && c <= 'z') && ind) {
 				ind = false;
-				cout << "Error. Wrong entering.\nTry again\n";
+				cout << "that`s not one correct word.\nTry again, do it correctly\n";
 			}
 			else {
 				a[i] = c;
@@ -106,4 +106,22 @@ string PoleChudes::enteringWord()
 	a[i] = '\0';
 	return string(a);
 
+}
+
+ char PoleChudes::getLetterFromUser()
+{
+	char a;
+	bool ind;
+
+	do {
+		cin >> a;
+		if (a >= 'a' && a <= 'z'){
+			ind = false;
+		}
+		else {
+			ind = true;
+			cout << "\nthat`s exactly not a letter\nTry again: ";
+		}
+	} while (ind);
+	return a;
 }

@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cource_program.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="PoleChudes.cpp" />
   </ItemGroup>
   <ItemGroup>
