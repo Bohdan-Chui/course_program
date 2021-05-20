@@ -2,19 +2,19 @@
 
 void PoleChudes::showEnteredLetters()
 {
-	cout << "your entered letters: ";
+	cout << "Your entered letters: ";
 	if (numberOfEnteredLetters) {
 		for (int i = 0; i < numberOfEnteredLetters; i++) {
 			cout << enteredLetters[i] << ' ';
 		}
 	}
-	else cout << "no letters\n\n";
+	else cout << "no letters";
 }
 
 void PoleChudes::enterWordAndGreeting()
 {
-	cout << "hello my dear player, welcome\n\n";
-	cout << "please, enter word\n";
+	cout << "Hello my dear player, welcome\n\n";
+	cout << "Please, enter word\n";
 	userWord = enteringWord();
 	system("cls");
 	someCalculating();
@@ -36,12 +36,12 @@ void PoleChudes::letsPlay()
 	while (numberOfGuessedLetters < wordLenght) {
 
 		showEnteredLetters();
-		cout << "\n\nthe current state of the word  : " << guessWordByUser;
+		cout << "\n\nThe current state of the word  : " << guessWordByUser;
 		fillWord(guessWordByUser, enterLetter());
 		system("cls");
 	}
 
-	cout << "you won, guessed word: " << guessWordByUser << "\n bue!";
+	cout << "You won, guessed word: " << guessWordByUser << "\nBue!";
 	return;
 
 

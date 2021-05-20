@@ -3,7 +3,6 @@
 using namespace std;
 
 int main() {
-	cout << "Hello World!" << endl;
 	PoleChudes object;
 	object.enterWordAndGreeting();
 	object.letsPlay();
