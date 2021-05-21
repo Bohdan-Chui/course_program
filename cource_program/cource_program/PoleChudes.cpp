@@ -18,6 +18,7 @@ void PoleChudes::enterWordAndGreeting()
 	userWord = enteringWord();
 	system("cls");
 	someCalculating();
+	cout <<"min steps " << minSteps(userWord) << "\n";
 }
 
 void PoleChudes::someCalculating()
@@ -76,35 +77,27 @@ void PoleChudes::fillWord(string& word, char letter)
 		if (letter == userWord[i]) {
 			guessWordByUser[i] = letter;
 			numberOfGuessedLetters++;
-
 		}
-
 	}
-
 }
 
 string PoleChudes::enteringWord()
 {
-	char c, a[MaxLettersInWord];
+	string word;
 	bool ind;
-	int i;
 	do {
-		ind = true;
-		i = 0;
-		while ((c = getchar()) != '\n') {
-			if (!(c >= 'a' && c <= 'z') && ind) {
-				ind = false;
-				cout << "that`s not one correct word.\nTry again, do it correctly\n";
-			}
-			else {
-				a[i] = c;
-				i++;
+		ind = false;
+		getline(cin, word);
+		for (char& c : word) {
+			if (!isalpha(c)) {
+				ind = true;
 			}
 		}
-	} while (!ind);
-
-	a[i] = '\0';
-	return string(a);
+		if (ind) {
+			cout << "that`s not one correct word.\nTry again, do it correctly\n";
+		}
+	} while (ind);
+	return word;
 
 }
 
@@ -115,7 +108,7 @@ string PoleChudes::enteringWord()
 
 	do {
 		cin >> a;
-		if (a >= 'a' && a <= 'z'){
+		if (isalpha(a)){
 			ind = false;
 		}
 		else {
@@ -125,3 +118,34 @@ string PoleChudes::enteringWord()
 	} while (ind);
 	return a;
 }
+
+ int PoleChudes::minSteps(string word)
+ {
+	 //char letters[20];
+	 //int count = 0, j;
+	 //bool ind;
+	 //for (int i = 0; i < wordLenght; i++) {
+		// j = 0;
+		// ind = true;
+		// while (j < count && ind) {
+		//	 if (word[i] == letters[j]) {
+		//		 ind = false;
+		//	 }
+		//	 j++;
+		// }
+		// if (ind) {
+		//	 letters[j] = word[i];
+		//	 count++;
+		// }
+	 //}
+	 ////cout << count << endl;
+	 //return count;
+
+	 int count = 0;
+	 for (int i = 0; i < wordLenght; i++) //ітерація по слову
+		 if (word.find(word[i], i+1) != string::npos)
+			 count ++;
+	 return wordLenght - count;
+
+
+ }

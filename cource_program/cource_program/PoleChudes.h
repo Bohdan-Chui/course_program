@@ -20,5 +20,6 @@ public:
 	void fillWord(string& word, char letter);
 	string enteringWord();
 	char getLetterFromUser();
+	int minSteps(string word);
 };
 
