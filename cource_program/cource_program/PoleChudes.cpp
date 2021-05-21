@@ -1,5 +1,35 @@
 #include "PoleChudes.h"
 
+void PoleChudes::enterWordAndGreeting()   
+{
+	cout << "hello my dear player, welcome\n\n";
+	cout << "please, enter word\n";
+	userWord = enteringWord();
+	system("cls");
+	someCalculating();
+}
+
+string PoleChudes::enteringWord()
+{
+	string word;
+	bool ind;
+	do {
+		ind = false;
+		getline(cin, word);
+		for (char& c : word) {//пробігаємо по слову
+			if (!isalpha(c)) {
+				ind = true;
+			}
+		}
+		if (ind) {
+			cout << "that`s not one correct word.\nTry again, do it correctly\n";
+		}
+	} while (ind);
+
+	return word;
+
+}
+
 void PoleChudes::showEnteredLetters()
 {
 	cout << "your entered letters: ";
@@ -11,15 +41,7 @@ void PoleChudes::showEnteredLetters()
 	else cout << "no letters\n\n";
 }
 
-void PoleChudes::enterWordAndGreeting()
-{
-	cout << "hello my dear player, welcome\n\n";
-	cout << "please, enter word\n";
-	userWord = enteringWord();
-	system("cls");
-	someCalculating();
-	cout <<"min steps " << minSteps(userWord) << "\n";
-}
+
 
 void PoleChudes::someCalculating()
 {
@@ -30,12 +52,19 @@ void PoleChudes::someCalculating()
 	}
 	numberOfGuessedLetters = 0;
 	numberOfEnteredLetters = 0;
+
+	for (int i = 0; i < wordLenght; i++) {
+		if (isupper(userWord[i])) {
+			userWord[i] = tolower(userWord[i]);
+		}
+	}
+
 }
 
 void PoleChudes::letsPlay()
 {
 	while (numberOfGuessedLetters < wordLenght) {
-
+		cout << "min steps " << minSteps(userWord) << "\t\t" << "you done " << numberOfEnteredLetters << " attemps\n\n" ;
 		showEnteredLetters();
 		cout << "\n\nthe current state of the word  : " << guessWordByUser;
 		fillWord(guessWordByUser, enterLetter());
@@ -81,25 +110,6 @@ void PoleChudes::fillWord(string& word, char letter)
 	}
 }
 
-string PoleChudes::enteringWord()
-{
-	string word;
-	bool ind;
-	do {
-		ind = false;
-		getline(cin, word);
-		for (char& c : word) {
-			if (!isalpha(c)) {
-				ind = true;
-			}
-		}
-		if (ind) {
-			cout << "that`s not one correct word.\nTry again, do it correctly\n";
-		}
-	} while (ind);
-	return word;
-
-}
 
  char PoleChudes::getLetterFromUser()
 {
@@ -116,36 +126,19 @@ string PoleChudes::enteringWord()
 			cout << "\nthat`s exactly not a letter\nTry again: ";
 		}
 	} while (ind);
+
+	if (isupper(a)) {
+		a = tolower(a);
+	}
 	return a;
 }
 
  int PoleChudes::minSteps(string word)
  {
-	 //char letters[20];
-	 //int count = 0, j;
-	 //bool ind;
-	 //for (int i = 0; i < wordLenght; i++) {
-		// j = 0;
-		// ind = true;
-		// while (j < count && ind) {
-		//	 if (word[i] == letters[j]) {
-		//		 ind = false;
-		//	 }
-		//	 j++;
-		// }
-		// if (ind) {
-		//	 letters[j] = word[i];
-		//	 count++;
-		// }
-	 //}
-	 ////cout << count << endl;
-	 //return count;
-
 	 int count = 0;
 	 for (int i = 0; i < wordLenght; i++) //ітерація по слову
 		 if (word.find(word[i], i+1) != string::npos)
 			 count ++;
 	 return wordLenght - count;
-
 
  }
