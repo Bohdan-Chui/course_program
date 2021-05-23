@@ -40,8 +40,6 @@ void Menu::menu() {
 				x += 3;
 				gotoXY(18, x); cout << "->";
 				menu_item++;
-
-
 			}
 
 			if (GetAsyncKeyState(VK_UP) && x != 10) //up button pressed
@@ -50,7 +48,6 @@ void Menu::menu() {
 				x -= 3;
 				gotoXY(18, x); cout << "->";
 				menu_item--;
-
 			}
 
 			if (GetAsyncKeyState(VK_RETURN)) { // Enter key pressed
@@ -65,14 +62,12 @@ void Menu::menu() {
 
 
 				case 1: {
-					playWithComputer();
-					final();
+					play(true);
 					break;
 				}
 
 				case 2: {
-					playWithFriend();
-					final();
+					play(false);
 					break;
 				}
 
@@ -83,6 +78,7 @@ void Menu::menu() {
 					gotoXY(20, 20);
 
 					ind2 = false;
+					break;
 				}
 
 				}
@@ -109,28 +105,6 @@ void Menu::howToPlay()
 	gotoXY(5, 21);  cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
 	gotoXY(5, 26);  cout << "Press <enter> to menu";
 
-	system("pause>nul");
-	GetAsyncKeyState(VK_RETURN);
-}
-
-void PoleChudes::final() {
-	gotoXY(0, 2);
-	cout << "          ..    ..    ....    ..   ..          ..               ..    ..    ..     .." << endl;
-	cout << "           ..  ..    .    .   ..   ..           ..             ..     ..    .. .   .." << endl;
-	cout << "             ..      .    .   ..   ..            ..     .     ..      ..    ..  .  .." << endl;
-	cout << "             ..      .    .   ..   ..             ..  .. ..  ..       ..    ..   . .." << endl;
-	cout << "             ..       ....     .....               ...     ...        ..    ..     .." << endl;
-	gotoXY(7, 10);
-	cout << "Guessed word: " << guessWordByUser;
-	gotoXY(7, 12);
-	cout << "You used " << numberOfEnteredLetters << " attemptions";
-	gotoXY(7, 13);
-	cout << "Minimal attemptions for this word " << minAttemptions;
-	gotoXY(7, 16);
-	cout << "Bye!";
-	gotoXY(5, 19);
-	cout << "press enter to menu";
-	
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);
 }

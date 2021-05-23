@@ -21,21 +21,20 @@ class PoleChudes
 public:
 	void gotoXY(int, int);
 
-	void playWithFriend();
-	void playWithComputer();
+	void play(bool playerOrComputer);
 		string enteringWord();
 		string randomWord();
 
-	void someCalculating();
-		int minSteps(string word);
+		void someCalculating();
+			int minSteps(string word);
 
-	void letsPlay();
-		void showEnteredLetters();
-		void fillWord(char letter);
-			char enterLetter();
-				char getLetterFromUser();	
+		void letsPlay();
+			void showEnteredLetters();
+			void fillWord(char letter);
+				char enterLetter();
+					char getLetterFromUser();	
 	
-	void final();
+		void final();
 };
 
 class Menu :public PoleChudes

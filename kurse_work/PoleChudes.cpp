@@ -1,6 +1,6 @@
 #include "PoleChudes.h"
 
-void PoleChudes::playWithFriend()   
+/*void PoleChudes::playWithFriend()   
 {
 	userWord = enteringWord();
 	system("cls");
@@ -14,6 +14,14 @@ void PoleChudes::playWithComputer()
 	system("cls");
 	someCalculating();
 	letsPlay();
+}*/
+
+void PoleChudes::play(bool playerOrComputer) {
+	userWord = playerOrComputer? randomWord(): enteringWord();
+	system("cls");
+	someCalculating();
+	letsPlay();
+	final();
 }
 
 string PoleChudes::enteringWord()
@@ -176,4 +184,26 @@ char PoleChudes::getLetterFromUser()
 		a = tolower(a);
 	}
 	return a;
+}
+
+void PoleChudes::final() {
+	gotoXY(0, 2);
+	cout << "          ..    ..    ....    ..   ..          ..               ..    ..    ..     .." << endl;
+	cout << "           ..  ..    .    .   ..   ..           ..             ..     ..    .. .   .." << endl;
+	cout << "             ..      .    .   ..   ..            ..     .     ..      ..    ..  .  .." << endl;
+	cout << "             ..      .    .   ..   ..             ..  .. ..  ..       ..    ..   . .." << endl;
+	cout << "             ..       ....     .....               ...     ...        ..    ..     .." << endl;
+	gotoXY(7, 10);
+	cout << "Guessed word: " << guessWordByUser;
+	gotoXY(7, 12);
+	cout << "You used " << numberOfEnteredLetters << " attemptions";
+	gotoXY(7, 13);
+	cout << "Minimal attemptions for this word " << minAttemptions;
+	gotoXY(7, 16);
+	cout << "Bye!";
+	gotoXY(5, 19);
+	cout << "press enter to menu";
+
+	system("pause>nul");
+	GetAsyncKeyState(VK_RETURN);
 }
