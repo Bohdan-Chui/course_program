@@ -8,7 +8,7 @@
 
 using namespace std;
 #define numberOfWordsInFile 4
-#define Letters 26 //alfabet letters
+#define Letters 26 //alphabet letters
 #define MaxLettersInWord 15
 
 
@@ -19,22 +19,23 @@ class PoleChudes
 	int wordLenght, numberOfGuessedLetters, numberOfEnteredLetters, minAttemptions;
 	COORD CursorPosition;
 public:
-	void showEnteredLetters();
-	void playWithFriend();
-	void someCalculating();
-	void letsPlay();
-	char enterLetter();
-	void fillWord(string& word, char letter);
-	string enteringWord();
-	char getLetterFromUser();
-	int minSteps(string word);
-	string getword();
 	void gotoXY(int, int);
-	void playWithComputer();
-	string randomWord();
-	int getUsedAttemption();
-	int getMinAttemption();
 
+	void playWithFriend();
+	void playWithComputer();
+		string enteringWord();
+		string randomWord();
+
+	void someCalculating();
+		int minSteps(string word);
+
+	void letsPlay();
+		void showEnteredLetters();
+		void fillWord(char letter);
+			char enterLetter();
+				char getLetterFromUser();	
+	
+	void final();
 };
 
 class Menu :public PoleChudes
@@ -43,6 +44,6 @@ class Menu :public PoleChudes
 	bool running = true;
 public:
 	void menu();
-	void howToPlay();
-	void final(string, int, int);
+		void howToPlay();
+	
 };
