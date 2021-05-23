@@ -33,7 +33,7 @@ string PoleChudes::enteringWord()
 		gotoXY(25, 5);
 		cout << "Welcome\n\n";
 		gotoXY(16, 7);
-		cout << "please, enter one correct word";
+		cout << "Please, enter one correct word";
 		gotoXY(20, 9);
 		ind = false;
 		getline(cin, word);
@@ -145,13 +145,13 @@ char PoleChudes::enterLetter()
 {
 	char letter;
 	bool ind;
-	cout << "\nEnter one of few letters ";
+	cout << "\nEnter one of few letters: ";
 	letter = getLetterFromUser();
 	do {
 		ind = false;
 		for (int i = 0; i != numberOfEnteredLetters; i++) {
 			if (letter == enteredLetters[i]) {
-				cout << "\nletter " << letter << " is already enterred\nEnter enother one: ";
+				cout << "\nLetter '" << letter << "' is already enterred\nEnter enother one: ";
 				ind = true;
 				letter = getLetterFromUser();
 			}
@@ -176,7 +176,7 @@ char PoleChudes::getLetterFromUser()
 		}
 		else {
 			ind = true;
-			cout << "\nthat`s exactly not a letter\nTry again: ";
+			cout << "\nThat`s exactly not a letter\nTry again: ";
 		}
 	} while (ind);
 
@@ -202,7 +202,7 @@ void PoleChudes::final() {
 	gotoXY(7, 16);
 	cout << "Bye!";
 	gotoXY(5, 19);
-	cout << "press enter to menu";
+	cout << "Use <Enter> to menu";
 
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);
