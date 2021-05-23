@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <time.h>
+#include <cctype>
 
 using namespace std;
 #define numberOfWordsInFile 4
@@ -19,11 +20,11 @@ class PoleChudes
 	int wordLenght, numberOfGuessedLetters, numberOfEnteredLetters, minAttemptions;
 	COORD CursorPosition;
 public:
-	void gotoXY(int, int);
+	void gotoXY(int x, int y);
 
-	void play(bool playerOrComputer);
-		string enteringWord();
+	void play(bool computerOrPlayer);
 		string randomWord();
+		string enteringWord();
 
 		void someCalculating();
 			int minSteps(string word);

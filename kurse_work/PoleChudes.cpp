@@ -1,53 +1,11 @@
 #include "PoleChudes.h"
 
-/*void PoleChudes::playWithFriend()   
-{
-	userWord = enteringWord();
-	system("cls");
-	someCalculating();
-	letsPlay();
-}
-
-void PoleChudes::playWithComputer()
-{
-	userWord = randomWord();
-	system("cls");
-	someCalculating();
-	letsPlay();
-}*/
-
-void PoleChudes::play(bool playerOrComputer) {
-	userWord = playerOrComputer? randomWord(): enteringWord();
+void PoleChudes::play(bool computerOrPlayer) {
+	userWord = computerOrPlayer? randomWord(): enteringWord();
 	system("cls");
 	someCalculating();
 	letsPlay();
 	final();
-}
-
-string PoleChudes::enteringWord()
-{
-	string word;
-	bool ind;
-	do {
-		system("cls");
-		gotoXY(25, 5);
-		cout << "Welcome\n\n";
-		gotoXY(16, 7);
-		cout << "Please, enter one correct word";
-		gotoXY(20, 9);
-		ind = false;
-		getline(cin, word);
-		for (char& c : word) {//пробігаємо по слову
-			if (!isalpha(c)) {
-				ind = true;
-			}
-		}
-
-		if (word[0] == '\0')
-			ind = true;
-	} while (ind);
-
-	return word;
 }
 
 string PoleChudes::randomWord()
@@ -67,9 +25,47 @@ string PoleChudes::randomWord()
 	catch (std::exception const& e) {
 		system("cls");
 		cout << "There was an error: " << e.what() << endl;
+		cout << "Press <enter> to continue";
 		system("pause>null");
 	}
 	return result;
+}
+
+string PoleChudes::enteringWord()
+{
+	string word;
+	bool ind;
+	do {
+		system("cls");
+		gotoXY(25, 5);
+		cout << "Welcome";
+		gotoXY(16, 7);
+		cout << "Please, enter one correct word";
+		gotoXY(20, 9);
+		getline(cin, word);
+		
+		ind = false;
+		for (char& c : word) {//пробігаємо по слову
+			if (!isalpha(c)) {
+				ind = true;
+			}
+		}
+		if (word[0] == '\0')
+			ind = true;
+
+		if (ind) {
+			gotoXY(16, 9);
+			cout << "Entering isn't correct";
+			gotoXY(5, 19);
+			cout << "Use <Enter> to continue";
+			system("pause>nul");
+			GetAsyncKeyState(VK_RETURN);
+		}
+
+		
+	} while (ind);
+
+	return word;
 }
 
 void PoleChudes::someCalculating()
@@ -178,6 +174,7 @@ char PoleChudes::getLetterFromUser()
 			ind = true;
 			cout << "\nThat`s exactly not a letter\nTry again: ";
 		}
+		while (getchar() != '\n');
 	} while (ind);
 
 	if (isupper(a)) {
@@ -201,9 +198,9 @@ void PoleChudes::final() {
 	cout << "Minimal attemptions for this word " << minAttemptions;
 	gotoXY(7, 16);
 	cout << "Bye!";
+	
 	gotoXY(5, 19);
-	cout << "Use <Enter> to menu";
-
+	cout << "Use <Enter> to continue";
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);
 }
