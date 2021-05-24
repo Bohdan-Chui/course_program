@@ -1,7 +1,7 @@
 #include "PoleChudes.h"
 
 void PoleChudes::play(bool computerOrPlayer) {
-	userWord = computerOrPlayer? randomWord(): enteringWord();
+	userWord = computerOrPlayer ? randomWord() : enteringWord();
 	system("cls");
 	someCalculating();
 	letsPlay();
@@ -43,7 +43,7 @@ string PoleChudes::enteringWord()
 		cout << "Please, enter one correct word";
 		gotoXY(20, 9);
 		getline(cin, word);
-		
+
 		ind = false;
 		for (char& c : word) {//пробігаємо по слову
 			if (!isalpha(c)) {
@@ -62,7 +62,7 @@ string PoleChudes::enteringWord()
 			GetAsyncKeyState(VK_RETURN);
 		}
 
-		
+
 	} while (ind);
 
 	return word;
@@ -72,7 +72,7 @@ void PoleChudes::someCalculating()
 {
 	wordLenght = userWord.length();
 	guessWordByUser = userWord;
-	minAttemptions = minSteps(userWord);
+	minAttemptions = minSteps();
 	for (int i = 0; i < wordLenght; i++) {
 		guessWordByUser[i] = '_';
 	}
@@ -87,11 +87,11 @@ void PoleChudes::someCalculating()
 
 }
 
-int PoleChudes::minSteps(string word)
+int PoleChudes::minSteps()
 {
 	int count = 0;
 	for (int i = 0; i < wordLenght; i++) //ітерація по слову
-		if (word.find(word[i], i + 1) != string::npos)
+		if (userWord.find(userWord[i], i + 1) != string::npos)
 			count++;
 	return wordLenght - count;
 }
@@ -99,21 +99,32 @@ int PoleChudes::minSteps(string word)
 void PoleChudes::letsPlay()
 {
 	while (numberOfGuessedLetters < wordLenght) {
-		gotoXY(20, 2); cout << "POLE CHUDES";
+		gotoXY(20, 2); 
+		cout << "POLE CHUDES";
 		gotoXY(5, 4);
 		cout << "- - - - - - - - - - - - - - - - - - - - - - - - - -";
 		gotoXY(5, 5);
-		cout << "|\tmin steps " << minAttemptions << "\t|\t" << "you used " << numberOfEnteredLetters << " attemps\t|\n";
+		cout << "|\tmin steps " << minAttemptions << "\t|\tyou used " << numberOfEnteredLetters << " attemps\t|";
 		gotoXY(5, 6);
 		cout << "- - - - - - - - - - - - - - - - - - - - - - - - - -";
 		gotoXY(5, 8);
 		showEnteredLetters();
-		gotoXY(5, 9);
-		cout << "\n\nThe current state of the word: " << guessWordByUser;
+		gotoXY(5, 11);
+		cout << "The current state of the word: " << guessWordByUser;
 		fillWord(enterLetter());
 		system("cls");
 	}
-	return;
+}
+
+void PoleChudes::showEnteredLetters()
+{
+	cout << "Your entered letters: ";
+	if (numberOfEnteredLetters) {
+		for (int i = 0; i < numberOfEnteredLetters; i++) {
+			cout << enteredLetters[i] << ' ';
+		}
+	}
+	else cout << "no letters";
 }
 
 void PoleChudes::fillWord(char letter)
@@ -126,28 +137,22 @@ void PoleChudes::fillWord(char letter)
 	}
 }
 
-void PoleChudes::showEnteredLetters()
-{
-	cout << "Your entered letters: ";
-	if (numberOfEnteredLetters) {
-		for (int i = 0; i < numberOfEnteredLetters; i++) {
-			cout << enteredLetters[i] << ' ';
-		}
-	}
-	else cout << "no letters\n\n";
-}
-
 char PoleChudes::enterLetter()
 {
 	char letter;
 	bool ind;
-	cout << "\nEnter one of few letters: ";
+	gotoXY(5, 12);
+	cout << "Enter one of few letters: ";
 	letter = getLetterFromUser();
 	do {
 		ind = false;
-		for (int i = 0; i != numberOfEnteredLetters; i++) {
+		for (int i = 0; i < numberOfEnteredLetters; i++) {
 			if (letter == enteredLetters[i]) {
-				cout << "\nLetter '" << letter << "' is already enterred\nEnter enother one: ";
+				gotoXY(5, 12);
+				cout << "Letter '" << letter << "' is already enterred";
+				gotoXY(5, 13);
+				cout << "Enter enother one:  ";
+				gotoXY(24, 13);
 				ind = true;
 				letter = getLetterFromUser();
 			}
@@ -162,25 +167,29 @@ char PoleChudes::enterLetter()
 
 char PoleChudes::getLetterFromUser()
 {
-	char a;
+	char c;
 	bool ind;
 
 	do {
-		cin >> a;
-		if (isalpha(a)) {
+		cin >> c;
+		if (isalpha(c)) {
 			ind = false;
 		}
 		else {
 			ind = true;
-			cout << "\nThat`s exactly not a letter\nTry again: ";
+			gotoXY(5, 12);
+			cout << "That`s exactly not a letter";
+			gotoXY(5, 13);
+			cout << "Try again:  ";
+			gotoXY(16, 13);
 		}
 		while (getchar() != '\n');
 	} while (ind);
 
-	if (isupper(a)) {
-		a = tolower(a);
+	if (isupper(c)) {
+		c = tolower(c);
 	}
-	return a;
+	return c;
 }
 
 void PoleChudes::final() {
@@ -198,7 +207,7 @@ void PoleChudes::final() {
 	cout << "Minimal attemptions for this word " << minAttemptions;
 	gotoXY(7, 16);
 	cout << "Bye!";
-	
+
 	gotoXY(5, 19);
 	cout << "Use <Enter> to continue";
 	system("pause>nul");

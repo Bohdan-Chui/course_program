@@ -27,7 +27,7 @@ public:
 		string enteringWord();
 
 		void someCalculating();
-			int minSteps(string word);
+			int minSteps();
 
 		void letsPlay();
 			void showEnteredLetters();
