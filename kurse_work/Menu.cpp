@@ -11,8 +11,7 @@ void Menu::menu() {
 	bool ind1, ind2;
 	do {
 		menu_item = 0;
-		run = 0;
-		x = 10;
+		y = 10;
 		system("cls");
 		gotoXY(20, 2); cout << "POLE CHUDES";
 		gotoXY(24, 5); cout << "MENU";
@@ -34,19 +33,19 @@ void Menu::menu() {
 
 			system("pause>nul"); // the >nul bit causes it the print no message
 
-			if (GetAsyncKeyState(VK_DOWN) && x != 19) //down button pressed
+			if (GetAsyncKeyState(VK_DOWN) && y != 19) //down button pressed
 			{
-				gotoXY(18, x); cout << "  ";
-				x += 3;
-				gotoXY(18, x); cout << "->";
+				gotoXY(18, y); cout << "  ";
+				y += 3;
+				gotoXY(18, y); cout << "->";
 				menu_item++;
 			}
 
-			if (GetAsyncKeyState(VK_UP) && x != 10) //up button pressed
+			if (GetAsyncKeyState(VK_UP) && y != 10) //up button pressed
 			{
-				gotoXY(18, x); cout << "  ";
-				x -= 3;
-				gotoXY(18, x); cout << "->";
+				gotoXY(18, y); cout << "  ";
+				y -= 3;
+				gotoXY(18, y); cout << "->";
 				menu_item--;
 			}
 

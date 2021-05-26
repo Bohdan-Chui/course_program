@@ -34,16 +34,14 @@ public:
 			void fillWord(char letter);
 				char enterLetter();
 					char getLetterFromUser();	
-	
+
 		void final();
 };
 
 class Menu :public PoleChudes
 {
-	int menu_item, run, x;
-	bool running = true;
+	int menu_item, y;
 public:
 	void menu();
 		void howToPlay();
-	
 };
