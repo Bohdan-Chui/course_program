@@ -21,6 +21,9 @@ class PoleChudes
 	COORD CursorPosition;
 public:
 	void gotoXY(int x, int y);
+	void menu();
+
+	void howToPlay();
 
 	void play(bool computerOrPlayer);
 		string randomWord();
@@ -36,12 +39,4 @@ public:
 					char getLetterFromUser();	
 
 		void final();
-};
-
-class Menu :public PoleChudes
-{
-	int menu_item, y;
-public:
-	void menu();
-		void howToPlay();
 };

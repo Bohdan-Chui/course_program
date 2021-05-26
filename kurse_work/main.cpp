@@ -1,8 +1,8 @@
 ﻿#include "PoleChudes.h"
 
 int main() {
-	Menu obj;
+	PoleChudes obj;
 	obj.menu();
-
+	
 	return 0;
 }
