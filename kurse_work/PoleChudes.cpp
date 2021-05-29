@@ -90,17 +90,22 @@ void PoleChudes::menu() {
 void PoleChudes::howToPlay()
 {
 	system("cls");
-	gotoXY(5, 5);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
-	gotoXY(10, 7);  cout << "Friend game mode: ";
-	gotoXY(20, 9);  cout << "The first player enters a word.";
-	gotoXY(20, 10); cout << "The second player enters one or more letters";
-	gotoXY(20, 11); cout << "and tries to guess the word in the least number of attempts";
-	gotoXY(5, 13);  cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
-	gotoXY(10, 15); cout << "Computer game mode: ";
-	gotoXY(20, 17); cout << "The computer randomly chooses a word for the game.";
-	gotoXY(20, 19); cout << "The player tries to guess in the least number of attempts";
-	gotoXY(5, 21);  cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
-	gotoXY(5, 26);  cout << "Press <enter> to menu";
+	gotoXY(5, 2);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(10, 4);  cout << "Friend game mode: ";
+	gotoXY(20, 5);  cout << "The first player enters a word.";
+	gotoXY(20, 6);  cout << "The second player enters one or more letters";
+	gotoXY(20, 7);  cout << "and tries to guess the word in the least number of attempts";
+	gotoXY(5, 9);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(10, 11); cout << "Computer game mode: ";
+	gotoXY(20, 12); cout << "The computer randomly chooses a word for the game.";
+	gotoXY(20, 13); cout << "The player tries to guess in the least number of attempts";
+	gotoXY(5, 15);  cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(10, 17);  cout << "Rules:";
+	gotoXY(20, 18); cout << "You must only enter English alphabet characters";
+	gotoXY(20, 19); cout << "If you enter more than one character when entering letters,";
+	gotoXY(20, 20); cout << "then only the first is counted";
+	
+	gotoXY(5, 22);  cout << "Press <enter> to menu";
 
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);
@@ -141,6 +146,7 @@ string PoleChudes::enteringWord()
 {
 	string word;
 	bool ind;
+	int numOfLetters;
 	do {
 		system("cls");
 		gotoXY(25, 5);
@@ -150,17 +156,24 @@ string PoleChudes::enteringWord()
 		gotoXY(20, 9);
 		getline(cin, word);
 
+		numOfLetters = 0;
 		ind = false;
 		for (char& c : word) {//пробігаємо по слову
 			if (!isalpha(c)) {
 				ind = true;
 			}
+			numOfLetters++;
 		}
 		if (word[0] == '\0')
 			ind = true;
+		if (numOfLetters > MaxLettersInWord) {
+			ind = true;
+		}
 
 		if (ind) {
-			gotoXY(16, 9);
+			gotoXY(20, 9);
+			clear();
+			gotoXY(16, 11);
 			cout << "Entering isn't correct";
 			gotoXY(5, 19);
 			cout << "Use <Enter> to continue";
@@ -205,7 +218,7 @@ int PoleChudes::minSteps()
 void PoleChudes::letsPlay()
 {
 	while (numberOfGuessedLetters < wordLenght) {
-		gotoXY(20, 2); 
+		gotoXY(20, 2);
 		cout << "POLE CHUDES";
 		gotoXY(5, 4);
 		cout << "- - - - - - - - - - - - - - - - - - - - - - - - - -";
@@ -256,6 +269,7 @@ char PoleChudes::enterLetter()
 			if (letter == enteredLetters[i]) {
 				gotoXY(5, 12);
 				cout << "Letter '" << letter << "' is already enterred";
+				clear();
 				gotoXY(5, 13);
 				cout << "Enter enother one:  ";
 				gotoXY(24, 13);
@@ -285,6 +299,7 @@ char PoleChudes::getLetterFromUser()
 			ind = true;
 			gotoXY(5, 12);
 			cout << "That`s exactly not a letter";
+			clear();
 			gotoXY(5, 13);
 			cout << "Try again:  ";
 			gotoXY(16, 13);
@@ -318,4 +333,12 @@ void PoleChudes::final() {
 	cout << "Use <Enter> to continue";
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);
+}
+
+
+void PoleChudes::clear() {
+	for (int i = 0; i < 3000; i++) {
+		cout << ' ';
+	}
+	gotoXY(0, 0);
 }

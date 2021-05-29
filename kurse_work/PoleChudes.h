@@ -39,4 +39,5 @@ public:
 					char getLetterFromUser();	
 
 		void final();
+		void clear();
 };
