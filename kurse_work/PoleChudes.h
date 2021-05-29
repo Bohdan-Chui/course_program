@@ -8,9 +8,10 @@
 #include <cctype>
 
 using namespace std;
-#define numberOfWordsInFile 4
+#define NumberOfWordsInFile 4
 #define Letters 26 //alphabet letters
 #define MaxLettersInWord 15
+#define NumberOfWhiteSpaces 200
 
 
 class PoleChudes
@@ -26,8 +27,8 @@ public:
 	void howToPlay();
 
 	void play(bool computerOrPlayer);
-		string randomWord();
-		string enteringWord();
+		void randomWord();
+		void enteringWord();
 
 		void someCalculating();
 			int minSteps();
