@@ -9,97 +9,98 @@ void PoleChudes::gotoXY(int x, int y)//переносить курсор на п
 
 void PoleChudes::menu() {
 	int menu_item, y;//вибраний пункт меню; позиція по координаті y
-	bool ind1;//індикатор вибору пунктц меню
-		menu_item = 0;//встановлюе обраний пункт меню на перший
-		y = 10;//встановлює координату на 10
-		system("cls");//очищує єкран
-		gotoXY(20, 2); cout << "POLE CHUDES";
-		gotoXY(24, 5); cout << "MENU";
-		gotoXY(5, 7); cout << "- - - - - - - - - - - - - - - - - - - - - - - - -";
-		gotoXY(18, 10); cout << "->";
+	bool ind;//індикатор вибору пунктц меню
+	
+	menu_item = 0;//встановлюе обраний пункт меню на перший
+	
+	y = 10;//встановлює координату на 10
+	system("cls");//очищує єкран
+	gotoXY(20, 2); cout << "POLE CHUDES";
+	gotoXY(24, 5); cout << "MENU";
+	gotoXY(5, 7); cout << "- - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(22, 10);  cout << "How to play";
+	gotoXY(22, 13);  cout << "Play with computer";
+	gotoXY(22, 16);  cout << "Play with friend";
+	gotoXY(22, 19);  cout << "Quit Program";
+	gotoXY(5, 22); cout << "- - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(12, 24); cout << "Use <up arrow> or <down arrow> to navigate";
+	gotoXY(16, 25); cout << "Use <Enter> to choose";
 
-		gotoXY(5, 22); cout << "- - - - - - - - - - - - - - - - - - - - - - - - -";
-		gotoXY(12, 24); cout << " Use <PgUp> or <PgDn> to navigate";
-		gotoXY(16, 25); cout << " Use <Enter> to choose";
+	gotoXY(18, 10); cout << "->";
 
-		gotoXY(20, 10);  cout << "  How to play";
-		gotoXY(20, 13);  cout << "  Play with computer";
-		gotoXY(20, 16);  cout << "  Play with friend";
-		gotoXY(20, 19);  cout << "  Quit Program";
+	ind = true;
+	while (ind)
+	{
+		system("pause>nul"); //затрмка экрану 
 
-		ind1 = true;
-		while (ind1)
+		if (GetAsyncKeyState(VK_DOWN) && y != 19) //нажата кнопка "вниз"
 		{
-			system("pause>nul"); //затрмка экрану 
+			gotoXY(18, y); cout << "  ";
+			y += 3;
+			gotoXY(18, y); cout << "->";
+			menu_item++;
+		}
+		
+		else if (GetAsyncKeyState(VK_UP) && y != 10) //нажата кнопка "вверх"
+		{
+			gotoXY(18, y); cout << "  ";
+			y -= 3;
+			gotoXY(18, y); cout << "->";
+			menu_item--;
+		}
 
-			if (GetAsyncKeyState(VK_DOWN) && y != 19) //нажата кнопка "вниз"
-			{
-				gotoXY(18, y); cout << "  ";
-				y += 3;
-				gotoXY(18, y); cout << "->";
-				menu_item++;
+		else if (GetAsyncKeyState(VK_RETURN)) { //нажата кнопка "Enter"
+			ind = false; //вибор пункта меню завершить свою роботу
+
+			switch (menu_item) {
+
+			case 0: {
+				howToPlay();
+				break;
 			}
-			
-			else if (GetAsyncKeyState(VK_UP) && y != 10) //нажата кнопка "вверх"
-			{
-				gotoXY(18, y); cout << "  ";
-				y -= 3;
-				gotoXY(18, y); cout << "->";
-				menu_item--;
+
+			case 1: {
+				play(true);// гра з компютером
+				break;
 			}
 
-			else if (GetAsyncKeyState(VK_RETURN)) { //нажата кнопка "Enter"
-				ind1 = false; //вибор пункта меню завершить свою роботу
+			case 2: {
+				play(false);// гра з іншим гравцем
+				break;
+			}
 
-				switch (menu_item) {
-
-				case 0: {
-					howToPlay();
-					break;
-				}
-
-
-				case 1: {
-					play(true);// гра з компютером
-					break;
-				}
-
-				case 2: {
-					play(false);// гра з іншим гравцем
-					break;
-				}
-
-				case 3: {
-					system("cls");
-					gotoXY(20, 10);
-					cout << "Good luck!";
-					gotoXY(20, 20);
-					break;
-				}
-				}
+			case 3: {
+				system("cls");
+				gotoXY(20, 10); cout << "Good luck!";
+				
+				gotoXY(5, 22);  cout << "Press any key";
+				system("pause>nul");
+				break;
+			}
 			}
 		}
+	}
 }
 
 void PoleChudes::howToPlay() //правила игры
 {
 	system("cls");
-	gotoXY(5, 2);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
-	gotoXY(10, 4);  cout << "Friend game mode: ";
-	gotoXY(20, 5);  cout << "The first player enters a word.";
-	gotoXY(20, 6);  cout << "The second player enters one or more letters";
-	gotoXY(20, 7);  cout << "and tries to guess the word in the least number of attempts";
-	gotoXY(5, 9);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
-	gotoXY(10, 11); cout << "Computer game mode: ";
+	gotoXY(5, 0);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(10, 2);  cout << "Friend game mode:";
+	gotoXY(20, 4);  cout << "The first player enters a word.";
+	gotoXY(20, 5);  cout << "The second player enters one or more letters";
+	gotoXY(20, 6);  cout << "and tries to guess the word in the least number of attempts.";
+	gotoXY(5, 8);   cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+	gotoXY(10, 10); cout << "Computer game mode:";
 	gotoXY(20, 12); cout << "The computer randomly chooses a word for the game.";
-	gotoXY(20, 13); cout << "The player tries to guess in the least number of attempts";
+	gotoXY(20, 13); cout << "The player tries to guess in the least number of attempts.";
 	gotoXY(5, 15);  cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
 	gotoXY(10, 17);  cout << "Rules:";
-	gotoXY(20, 18); cout << "You must only enter English alphabet characters";
-	gotoXY(20, 19); cout << "If you enter more than one character when entering letters,";
-	gotoXY(20, 20); cout << "then only the first is counted";
+	gotoXY(20, 19); cout << "You must only enter English alphabet characters.";
+	gotoXY(20, 20); cout << "If you enter more than one character when entering letters,";
+	gotoXY(20, 21); cout << "then only the first is counted.";
 	
-	gotoXY(5, 22);  cout << "Press <enter> to menu";
+	gotoXY(5, 24);  cout << "Press any key to menu";
 
 	system("pause>nul");
 	GetAsyncKeyState(VK_RETURN);//очищує ввід клавіш
@@ -108,7 +109,6 @@ void PoleChudes::howToPlay() //правила игры
 
 void PoleChudes::play(bool computerOrPlayer) {
 	computerOrPlayer ? randomWord() : enteringWord();// якщо computerOrPlayer мае значення true, то спрацює гра з комп'ютером, в іншому випадк гра з іншим гравцем
-	system("cls");
 	someCalculating();
 	letsPlay();
 	final();
@@ -117,31 +117,29 @@ void PoleChudes::play(bool computerOrPlayer) {
 void PoleChudes::randomWord()
 {	
 	int num; //номер слова з фалу
-	string result; //слово отримане з файлу
+	
+	srand((unsigned int)time(0)); //задаємо початкове значення функції рандом
+	num = rand() % NumberOfWordsInFile; //випадкове значення з діапазону від нуля до кількості слів.
+	
 	try {
-		srand((unsigned int)time(0)); //задаємо початкове значення функції рандом
-		num = rand() % NumberOfWordsInFile; //випадкове значення з діапазону від нуля до кількості слів.
 		ifstream in("words.txt"); //підключаеє файл 
 		in.exceptions(ifstream::eofbit | ifstream::failbit | ifstream::badbit);//генерує exception при винекненні помилок
 		//зчитує слово з номером num+1
 		for (int i = 0; i <= num; i++) {
-			getline(in, result);
+			getline(in, userWord);
 		}
 		in.close();//закриває файл
 	}
-	catch (std::exception const& e) {//ловить exception, виводить повідомлення на екран
+	catch (exception const& e) {//ловить exception, виводить повідомлення на екран
 		system("cls");
-		cout << "There was an error: " << e.what() << endl;
-		cout << "Press <enter> to continue";
+		gotoXY(5, 2); cout << "There was an error: " << e.what();
+		gotoXY(5, 4); cout << "Press any key to continue";
 		system("pause>null");
 	}
-
-	userWord = result;
 }
 
 void PoleChudes::enteringWord()
 {
-	string word; //слово введене користувачем
 	bool ind; //індикатор правельності вводу
 	int numOfLetters; //кількість літер
 	do {
@@ -152,17 +150,17 @@ void PoleChudes::enteringWord()
 		cout << "Please, enter one correct word";
 		gotoXY(20, 9);
 
-		getline(cin, word);//зчитує сторку
+		getline(cin, userWord);//зчитує сторку
 
 		numOfLetters = 0;
 		ind = false;
-		for (char& c : word) {//пробігає по слову, перевіряє чм правельний ввід, рахує кількість літер 
+		for (char& c : userWord) {//пробігає по слову, перевіряє чм правельний ввід, рахує кількість літер 
 			if (!isalpha(c)) {
 				ind = true;
 			}
 			numOfLetters++;
 		}
-		if (word[0] == '\0' ||  numOfLetters > MaxLettersInWord)//якщо не введено жодного символу, або занадто довге слово
+		if (userWord[0] == '\0' ||  numOfLetters > MaxLettersInWord)//якщо не введено жодного символу, або занадто довге слово
 			ind = true;
 
 		if (ind) {//при винекнені помилки виводить повідомлення про неправельний ввід
@@ -171,14 +169,12 @@ void PoleChudes::enteringWord()
 			gotoXY(16, 11);
 			cout << "Entering isn't correct";
 			gotoXY(5, 19);
-			cout << "Use <Enter> to continue";
+			cout << "Press any key to continue";
 			system("pause>nul");//затримка єкрану
 			GetAsyncKeyState(VK_RETURN);//очищує ввід клавіш
 		}
 
 	} while (ind);//проки ввід неправельний
-
-	userWord = word;
 }
 
 void PoleChudes::someCalculating()
@@ -186,19 +182,15 @@ void PoleChudes::someCalculating()
 	wordLenght = userWord.length();//довжина рядку userWord
 	guessWordByUser = userWord;//ініціалізація змінної
 	minAttemptions = minSteps();//мінімальна к-ть кроків до виграшу
-	for (int i = 0; i < wordLenght; i++) {//заповнюємо слово символом "_"
+	for (int i = 0; i < wordLenght; i++) {//заповнюємо слово символом "_", та змінюємо регістр всіх літер у слові на нижній
 		guessWordByUser[i] = '_';
-	}
-	//кількість вгаданих і введених літер дорівнює нулю
-	numberOfGuessedLetters = 0;
-	numberOfEnteredLetters = 0;
-
-	for (int i = 0; i < wordLenght; i++) {//змінюємо регістр всіх літер у слові на нижній
 		if (isupper(userWord[i])) {
 			userWord[i] = tolower(userWord[i]);
 		}
 	}
-
+	//кількість вгаданих і введених літер дорівнює нулю
+	numberOfGuessedLetters = 0;
+	numberOfEnteredLetters = 0;
 }
 
 int PoleChudes::minSteps()
@@ -213,6 +205,7 @@ int PoleChudes::minSteps()
 void PoleChudes::letsPlay()
 {
 	while (numberOfGuessedLetters < wordLenght) {//пока не вгадані всі літери
+		system("cls");
 		gotoXY(20, 2);
 		cout << "POLE CHUDES";
 		gotoXY(5, 4);
@@ -226,7 +219,6 @@ void PoleChudes::letsPlay()
 		gotoXY(5, 11);
 		cout << "The current state of the word: " << guessWordByUser;
 		fillWord(enterLetter());
-		system("cls");
 	}
 }
 
@@ -309,6 +301,7 @@ char PoleChudes::getLetterFromUser()
 }
 
 void PoleChudes::final() {//віводить повідомлення про перемогу та деяку інформацію про партію
+	system("cls");
 	gotoXY(0, 2);
 	cout << "          ..    ..    ....    ..   ..          ..               ..    ..    ..     .." << endl;
 	cout << "           ..  ..    .    .   ..   ..           ..             ..     ..    .. .   .." << endl;
@@ -325,7 +318,7 @@ void PoleChudes::final() {//віводить повідомлення про п�
 	cout << "Bye!";
 
 	gotoXY(5, 19);
-	cout << "Use <Enter> to continue";
+	cout << "Press any key to continue";
 	system("pause>nul");//затримка памяті 
 	GetAsyncKeyState(VK_RETURN);//очищує ввід клавіш
 	menu();
